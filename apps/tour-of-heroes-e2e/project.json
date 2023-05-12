@@ -1,0 +1,33 @@
+{
+  "name": "tour-of-heroes-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/tour-of-heroes-e2e/src",
+  "projectType": "application",
+  "targets": {
+    "e2e": {
+      "executor": "@nx/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/tour-of-heroes-e2e/cypress.config.ts",
+        "devServerTarget": "tour-of-heroes:serve:development",
+        "testingType": "e2e"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "tour-of-heroes:serve:production"
+        },
+        "ci": {
+          "devServerTarget": "tour-of-heroes:serve-static"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/tour-of-heroes-e2e/**/*.{js,ts}"]
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["tour-of-heroes"]
+}
